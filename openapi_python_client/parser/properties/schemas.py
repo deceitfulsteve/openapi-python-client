@@ -161,7 +161,7 @@ def parameter_from_data(
 
     new_param = Parameter(
         name=name,
-        required=required,
+        required=data.required,
         explode=data.explode,
         style=data.style,
         param_schema=data.param_schema,

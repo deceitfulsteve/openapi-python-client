@@ -1165,7 +1165,8 @@
           },
           {"$ref": "#/components/parameters/header-param"},
           {"$ref": "#/components/parameters/cookie-param"},
-          {"$ref": "#/components/parameters/path-param"}
+          {"$ref": "#/components/parameters/path-param"},
+          {"$ref": "#/components/parameters/required-param"}
         ],
         "responses": {
           "200": {
@@ -2283,6 +2284,14 @@
       "path-param": {
         "name": "path_param",
         "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "required-param": {
+        "name": "required param",
+        "in": "query",
         "required": true,
         "schema": {
           "type": "string"
