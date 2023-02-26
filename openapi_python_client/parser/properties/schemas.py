@@ -146,8 +146,6 @@ class Parameters:
 
 def parameter_from_data(
     *,
-    name: str,
-    required: bool,
     data: Union[oai.Reference, oai.Parameter],
     parameters: Parameters,
 ) -> Tuple[Union[Parameter, ParameterError], Parameters]:
@@ -160,14 +158,14 @@ def parameter_from_data(
         return ParameterError("Parameter has no schema"), parameters
 
     new_param = Parameter(
-        name=name,
+        name=data.name,
         required=data.required,
         explode=data.explode,
         style=data.style,
         param_schema=data.param_schema,
         param_in=data.param_in,
     )
-    parameters = attr.evolve(parameters, classes_by_name={**parameters.classes_by_name, name: new_param})
+    parameters = attr.evolve(parameters, classes_by_name={**parameters.classes_by_name, data.name: new_param})
     return new_param, parameters
 
 
@@ -188,7 +186,7 @@ def update_parameters_with_data(
     See Also:
         - https://swagger.io/docs/specification/using-ref/
     """
-    param, parameters = parameter_from_data(data=data, name=data.name, parameters=parameters, required=True)
+    param, parameters = parameter_from_data(data=data, parameters=parameters)
 
     if isinstance(param, ParameterError):
         param.detail = f"{param.header}: {param.detail}"
