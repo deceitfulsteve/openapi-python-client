@@ -146,13 +146,10 @@ class Parameters:
 
 def parameter_from_data(
     *,
-    data: Union[oai.Reference, oai.Parameter],
+    data: oai.Parameter,
     parameters: Parameters,
 ) -> Tuple[Union[Parameter, ParameterError], Parameters]:
     """Generates parameters from an OpenAPI Parameter spec."""
-
-    if isinstance(data, oai.Reference):
-        return ParameterError("Unable to resolve another reference"), parameters
 
     if data.param_schema is None:
         return ParameterError("Parameter has no schema"), parameters

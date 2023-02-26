@@ -42,16 +42,6 @@ def test_class_from_string(class_override, module_override, expected_class, expe
 
 
 class TestParameterFromData:
-    def test_cannot_parse_parameters_by_reference(self):
-        from openapi_python_client.parser.properties import Parameters
-        from openapi_python_client.parser.properties.schemas import parameter_from_data
-
-        ref = Reference.construct(ref="#/components/parameters/a_param")
-        parameters = Parameters()
-        param_or_error, new_parameters = parameter_from_data(data=ref, parameters=parameters)
-        assert param_or_error == ParameterError("Unable to resolve another reference")
-        assert new_parameters == parameters
-
     def test_parameters_without_schema_are_ignored(self):
         from openapi_python_client.parser.properties import Parameters
         from openapi_python_client.parser.properties.schemas import parameter_from_data
